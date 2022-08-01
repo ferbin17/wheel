@@ -51,7 +51,7 @@ const Sidebar = () => {
       navLinks={SIDENAV_LINKS}
       appName={APP_NAME}
       organizationInfo={{
-        name: "Wheel",
+        name: "neetoUIChallenge",
         subdomain: "bigbinary.com",
       }}
       profileInfo={{
