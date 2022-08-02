@@ -1,9 +1,13 @@
 import React from "react";
 
 import { Clock } from "@bigbinary/neeto-icons";
-import { Avatar, Tag, Tooltip, Typography } from "@bigbinary/neetoui";
+import { Avatar, Tooltip, Typography } from "@bigbinary/neetoui";
 
-const NoteFooter = ({ tag, created_at, user }) => {
+import NoteTag from "./NoteTag";
+
+const NoteFooter = ({ note }) => {
+  const { tags, status, created_at, user } = note;
+
   const parseDateTime = datetime => {
     const timestamp = Date.parse(datetime);
     const hours_ago = (Date.parse(Date()) - timestamp) / (1000 * 60 * 60);
@@ -34,17 +38,16 @@ const NoteFooter = ({ tag, created_at, user }) => {
       am_pm: dateObject.getHours() >= 12 ? "PM" : "AM",
     };
 
-    return `${date.day}/${date.month}/${date.year} ${time.hours}:${time.minutes} ${time.am_pm}`;
+    return `${date.day}/${date.month}/${date.year}, ${time.hours}:${time.minutes}${time.am_pm}`;
   };
 
   return (
     <div className="mt-3 flex w-full justify-between">
-      <Tag
-        className="neeto-ui-bg-gray-100 neeto-ui-text-gray-600"
-        label={tag}
-        size="small"
-        style="outline"
-      />
+      <div className="flex items-center">
+        {tags.map(tag => (
+          <NoteTag key={tag.toLowerCase().replace(/ /g, "_")} tag={tag} />
+        ))}
+      </div>
 
       <div className="flex items-center">
         <Clock color="#1e1e20" size={15} />
@@ -56,7 +59,7 @@ const NoteFooter = ({ tag, created_at, user }) => {
             position="bottom"
           >
             <Typography style="body2" className="neeto-ui-text-gray-600 mx-2">
-              Created {parseDateTime(created_at)}
+              {`${status} ${parseDateTime(created_at)}`}
             </Typography>
           </Tooltip>
         </div>
@@ -64,8 +67,10 @@ const NoteFooter = ({ tag, created_at, user }) => {
         <Avatar
           size="medium"
           user={{
-            name: `${user.first_name} ${user.last_name}`,
-            imageUrl: user.profile_image_path,
+            name: `${user.firstName} ${user.lastName}`,
+            imageUrl: [null, "https://picsum.photos/200"][
+              Math.floor(Math.random() * 2)
+            ],
           }}
         />
       </div>
