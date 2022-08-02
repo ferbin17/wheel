@@ -4,27 +4,8 @@ import EmptyNotesListImage from "images/EmptyNotesList";
 
 import EmptyState from "components/Common/EmptyState";
 
+import { TAGS, STATUS, NAMES } from "./constants";
 import Note from "./Note";
-
-const DUMMY_TAGS = [
-  "Gettings Started",
-  "Onboarding",
-  "User Flow",
-  "UX",
-  "Bugs",
-  "V2",
-];
-const STATUS = ["Drafted", "Created", "Updated"];
-const NAMES = [
-  "Debra",
-  "Allen",
-  "Gerald",
-  "Harris",
-  "Raymond",
-  "Carter",
-  "Jacqueline",
-  "Torres",
-];
 
 const NotesList = ({
   notes,
@@ -33,45 +14,36 @@ const NotesList = ({
   setShowNewNotePane,
 }) => {
   // Only for data creation purpose
-  const chooseRandomTags = () => {
-    const shuffled = DUMMY_TAGS.sort(() => 0.5 - Math.random());
-    const randomNumber = Math.floor(
-      Math.random() * (DUMMY_TAGS.length - 1) + 1
-    );
+  const chooseRandomElement = list => {
+    const randomNumber = Math.floor(Math.random() * list.length);
 
-    return shuffled.slice(0, randomNumber);
+    return list[randomNumber];
   };
 
   // Only for data creation purpose
-  const addTagsToNote = allNotes =>
+  const addTagToNote = allNotes =>
     allNotes.map(note => {
-      const tags = chooseRandomTags();
-      return { ...note, tags };
+      const tag = chooseRandomElement(TAGS);
+      return { ...note, tag };
     });
 
   // Only for data creation purpose
   const addStatusToNote = allNotes =>
-    allNotes.map(note => {
-      const randomNumber = Math.floor(Math.random() * STATUS.length);
-      return { ...note, status: STATUS[randomNumber] };
-    });
+    allNotes.map(note => ({ ...note, status: chooseRandomElement(STATUS) }));
 
   // Only for data creation purpose
   const addUserToNote = allNotes =>
-    allNotes.map(note => {
-      const randomNumber1 = Math.floor(Math.random() * NAMES.length);
-      const randomNumber2 = Math.floor(Math.random() * NAMES.length);
-      return {
-        ...note,
-        user: {
-          firstName: NAMES[randomNumber1],
-          lastName: NAMES[randomNumber2],
-        },
-      };
-    });
+    allNotes.map(note => ({
+      ...note,
+      user: {
+        firstName: chooseRandomElement(NAMES),
+        lastName: chooseRandomElement(NAMES),
+      },
+      contact: chooseRandomElement(NAMES),
+    }));
 
   if (notes.length) {
-    notes = addTagsToNote(notes);
+    notes = addTagToNote(notes);
     notes = addStatusToNote(notes);
     notes = addUserToNote(notes);
   }
