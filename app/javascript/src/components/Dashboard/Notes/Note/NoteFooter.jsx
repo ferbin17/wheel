@@ -6,7 +6,7 @@ import { Avatar, Tooltip, Typography } from "@bigbinary/neetoui";
 import NoteTag from "./NoteTag";
 
 const NoteFooter = ({ note }) => {
-  const { tags, status, created_at, user } = note;
+  const { tag, status, created_at, user } = note;
 
   const parseDateTime = datetime => {
     const timestamp = Date.parse(datetime);
@@ -44,9 +44,9 @@ const NoteFooter = ({ note }) => {
   return (
     <div className="mt-3 flex w-full justify-between">
       <div className="flex items-center">
-        {tags.map(tag => (
+        {tag && (
           <NoteTag key={tag.toLowerCase().replace(/ /g, "_")} tag={tag} />
-        ))}
+        )}
       </div>
 
       <div className="flex items-center">
