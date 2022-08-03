@@ -3,9 +3,9 @@ import React from "react";
 import { MenuHorizontal } from "@bigbinary/neeto-icons";
 import { Dropdown } from "@bigbinary/neetoui";
 
-const ContactActions = ({ contactId }) => {
+const ContactActions = ({ contactId, onDeleteClick }) => {
   const onDeleteClickHandler = selectedContactId => {
-    alert(selectedContactId);
+    onDeleteClick(selectedContactId);
   };
 
   return (
