@@ -3,27 +3,35 @@ import React, { useEffect, useState } from "react";
 import { Button, PageLoader } from "neetoui";
 import { Container, Header } from "neetoui/layouts";
 
-import { CONTACTS } from "./constants";
+import { fetchContactValues } from "./constants";
 import ContactList from "./ContactList";
 import ContactsMenu from "./ContactsMenu";
+import DeleteContactAlert from "./DeleteAlert";
 import NewContactPane from "./Pane/Create";
 
 const Contacts = () => {
   const [loading, setLoading] = useState(true);
   const [showContactsMenu, setshowContactsMenu] = useState(false);
   const [showNewContactPane, setShowNewContactPane] = useState(false);
+  const [showDeleteContactAlert, setShowDeleteContactAlert] = useState(false);
 
   const [contacts, setContacts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedContactId, setSelectedContactId] = useState(null);
 
   useEffect(() => {
     fetchContacts();
   }, []);
 
+  const deleteClickHandler = selectedId => {
+    setSelectedContactId(selectedId);
+    setShowDeleteContactAlert(true);
+  };
+
   const fetchContacts = async () => {
     try {
       setLoading(true);
-      setContacts(CONTACTS);
+      setContacts(fetchContactValues(deleteClickHandler));
     } catch (error) {
       logger.error(error);
     } finally {
@@ -60,12 +68,21 @@ const Contacts = () => {
         <ContactList
           contacts={contacts}
           setShowNewContactPane={setShowNewContactPane}
+          onDeleteClick={deleteClickHandler}
         />
 
         <NewContactPane
           showPane={showNewContactPane}
           setShowPane={setShowNewContactPane}
         />
+
+        {showDeleteContactAlert && (
+          <DeleteContactAlert
+            selectedContactId={selectedContactId}
+            setSelectedContactId={setSelectedContactId}
+            onClose={() => setShowDeleteContactAlert(false)}
+          />
+        )}
       </Container>
     </>
   );
