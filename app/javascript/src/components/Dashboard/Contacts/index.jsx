@@ -6,6 +6,7 @@ import { Container, Header } from "neetoui/layouts";
 import { CONTACTS } from "./constants";
 import ContactList from "./ContactList";
 import ContactsMenu from "./ContactsMenu";
+import NewContactPane from "./Pane/Create";
 
 const Contacts = () => {
   const [loading, setLoading] = useState(true);
@@ -45,7 +46,7 @@ const Contacts = () => {
           }}
           actionBlock={
             <Button
-              onClick={() => setshowContactsMenu(true)}
+              onClick={() => setShowNewContactPane(true)}
               label="Add Contact"
               icon="ri-add-line"
             />
@@ -61,7 +62,10 @@ const Contacts = () => {
           setShowNewContactPane={setShowNewContactPane}
         />
 
-        {showNewContactPane}
+        <NewContactPane
+          showPane={showNewContactPane}
+          setShowPane={setShowNewContactPane}
+        />
       </Container>
     </>
   );

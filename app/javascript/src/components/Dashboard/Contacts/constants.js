@@ -1,10 +1,26 @@
 import React from "react";
 
+import * as yup from "yup";
+
 import ContactActions from "./Contact/ContactActions";
 import ContactAvatar from "./Contact/ContactAvatar";
 import ContactDetailText from "./Contact/ContactDetailText";
 
 import { NAMES } from "../Notes/constants";
+
+export const CONTACTS_FORM_INITIAL_FORM_VALUES = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  role: "",
+};
+
+export const CONTACTS_FORM_VALIDATION_SCHEMA = yup.object().shape({
+  firstName: yup.string().required("First Name is required"),
+  lastName: yup.string().required("Last Name is required"),
+  email: yup.string().required("Email Address is required"),
+  role: yup.object().required("Role is required").nullable(),
+});
 
 export const CONTACTS_TABLE_COLUMN_DATA = [
   {
@@ -86,3 +102,5 @@ export const CONTACTS = Array(5)
       icon_button: <ContactActions contactId={contactId} />,
     };
   });
+
+export const ROLES = ["Regular User", "Editor", "Owner"];
