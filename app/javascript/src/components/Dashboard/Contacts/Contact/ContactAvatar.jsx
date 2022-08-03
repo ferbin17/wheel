@@ -16,7 +16,9 @@ const ContactAvatar = ({ name }) => (
     />
     <div className="flex w-full flex-col">
       <Typography style="h4">{name}</Typography>
-      <Typography style="body3">Owner</Typography>
+      <Typography style="body3" className="neeto-ui-text-gray-600">
+        Owner
+      </Typography>
     </div>
   </div>
 );

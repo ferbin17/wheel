@@ -19,7 +19,9 @@ export const CONTACTS_TABLE_COLUMN_DATA = [
     dataIndex: "email",
     key: "email",
     width: "35%",
-    render: email => <ContactDetailText text={email} />,
+    render: email => (
+      <ContactDetailText text={email} classes="neeto-ui-text-gray-600" />
+    ),
   },
   {
     title: "Created at",
@@ -47,7 +49,9 @@ export const CONTACTS_TABLE_COLUMN_DATA = [
         3
       )}, ${date.getDate()}, ${date.getFullYear()}`;
 
-      return <ContactDetailText text={date_value} />;
+      return (
+        <ContactDetailText text={date_value} classes="neeto-ui-text-gray-600" />
+      );
     },
   },
   {
