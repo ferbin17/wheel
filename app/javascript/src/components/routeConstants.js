@@ -2,9 +2,11 @@ import Login from "components/Authentication/Login";
 import PasswordReset from "components/Authentication/ResetPassword";
 import Signup from "components/Authentication/Signup";
 import Dashboard from "components/Dashboard";
+import Contacts from "components/Dashboard/Contacts";
 import Notes from "components/Dashboard/Notes";
 import Settings from "components/Dashboard/Settings";
 
+export const CONTACTS_PATH = "/contacts";
 export const DASHBOARD_PATH = "/";
 export const NOTES_PATH = "/notes";
 export const CHANGE_PASSWORD_PATH = "/settings?tab=password";
@@ -32,6 +34,10 @@ export const AUTH_ROUTES = [
 export const PRIVATE_ROUTES = [{ path: DASHBOARD_PATH, component: Dashboard }];
 
 export const DASHBOARD_ROUTES = [
+  {
+    path: CONTACTS_PATH,
+    component: Contacts,
+  },
   {
     path: NOTES_PATH,
     component: Notes,
