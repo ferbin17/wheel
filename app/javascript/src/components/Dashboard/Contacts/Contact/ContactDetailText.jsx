@@ -1,15 +1,12 @@
 import React from "react";
 
 import { Typography } from "@bigbinary/neetoui";
+import classNames from "classnames";
 
-const ContactDetailText = ({ text, classes }) => {
-  const componentClassNames = classes ? `${classes} ` : "";
-
-  return (
-    <div className={`${componentClassNames} flex items-center`}>
-      <Typography style="body2">{text}</Typography>
-    </div>
-  );
-};
+const ContactDetailText = ({ text, classes }) => (
+  <div className={classNames("flex items-center", classes)}>
+    <Typography style="body2">{text}</Typography>
+  </div>
+);
 
 export default ContactDetailText;

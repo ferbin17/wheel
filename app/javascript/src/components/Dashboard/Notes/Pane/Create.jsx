@@ -17,10 +17,10 @@ export default function NewNotePane({ fetchNotes, showPane, setShowPane }) {
         </Typography>
       </Pane.Header>
       <Form
+        isEdit={false}
         onClose={onClose}
         refetch={fetchNotes}
         note={NOTES_FORM_INITIAL_FORM_VALUES}
-        isEdit={false}
       />
     </Pane>
   );

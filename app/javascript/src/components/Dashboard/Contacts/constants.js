@@ -2,11 +2,8 @@ import React from "react";
 
 import * as yup from "yup";
 
-import ContactActions from "./Contact/ContactActions";
 import ContactAvatar from "./Contact/ContactAvatar";
 import ContactDetailText from "./Contact/ContactDetailText";
-
-import { NAMES } from "../Notes/constants";
 
 export const CONTACTS_FORM_INITIAL_FORM_VALUES = {
   firstName: "",
@@ -19,7 +16,7 @@ export const CONTACTS_FORM_VALIDATION_SCHEMA = yup.object().shape({
   firstName: yup.string().required("First Name is required"),
   lastName: yup.string().required("Last Name is required"),
   email: yup.string().required("Email Address is required"),
-  role: yup.object().required("Role is required").nullable(),
+  role: yup.string().required("Role is required"),
 });
 
 export const CONTACTS_TABLE_COLUMN_DATA = [
@@ -77,34 +74,5 @@ export const CONTACTS_TABLE_COLUMN_DATA = [
     width: "5%",
   },
 ];
-
-export function fetchContactValues(onDeleteClick) {
-  return Array(5)
-    .fill(NAMES)
-    .flat()
-    .map(name => {
-      const lastName = NAMES[Math.floor(Math.random() * NAMES.length)];
-      const contactId = Math.random()
-        .toString(36)
-        .replace(/[^a-z]+/g, "")
-        .substr(2, 10);
-      const startDate = new Date(2012, 0, 1);
-      const endDate = new Date();
-
-      return {
-        id: contactId,
-        key: contactId,
-        name: `${name} ${lastName}`,
-        role: "Owner",
-        email: `${name.toLowerCase()}${lastName.toLowerCase()}@example.com`,
-        created_at:
-          startDate.getTime() +
-          Math.random() * (endDate.getTime() - startDate.getTime()),
-        icon_button: (
-          <ContactActions contactId={contactId} onDeleteClick={onDeleteClick} />
-        ),
-      };
-    });
-}
 
 export const ROLES = ["Regular User", "Editor", "Owner"];

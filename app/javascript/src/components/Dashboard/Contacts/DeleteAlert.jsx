@@ -27,13 +27,13 @@ const DeleteContactAlert = ({
   return (
     <Alert
       isOpen
+      closeButton={false}
       onSubmit={handleDelete}
       onClose={onClose}
       message="Are you sure you want to delete the contact? These changes cannot be undone."
       title="Delete Contact"
       isSubmitting={deleting}
       size="md"
-      closeButton={false}
     />
   );
 };

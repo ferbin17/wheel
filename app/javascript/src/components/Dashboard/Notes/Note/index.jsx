@@ -1,9 +1,9 @@
 import React from "react";
 
-import NoteContainer from "./Note/NoteContainer";
-import NoteContent from "./Note/NoteContent";
-import NoteFooter from "./Note/NoteFooter";
-import NoteHeader from "./Note/NoteHeader";
+import NoteContainer from "./NoteContainer";
+import NoteContent from "./NoteContent";
+import NoteFooter from "./NoteFooter";
+import NoteHeader from "./NoteHeader";
 
 const Note = ({ note, onEditClick, onDeleteClick }) => (
   <NoteContainer key={note.id}>

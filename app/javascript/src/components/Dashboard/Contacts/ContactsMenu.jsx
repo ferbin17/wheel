@@ -14,12 +14,11 @@ const ContactsMenu = ({ showContactsMenu }) => {
         <MenuBar.Block label="Archived" count={0} />
         <MenuBar.Block label="Completed" count={0} />
         <MenuBar.Block label="Phase 2" count={0} />
-
         <MenuBar.SubTitle
           iconProps={[
             {
               icon: Search,
-              onClick: () => setIsSearchCollapsed(!isSearchCollapsed),
+              onClick: () => setIsSearchCollapsed(prevState => !prevState),
             },
           ]}
         >

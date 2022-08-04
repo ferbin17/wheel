@@ -33,41 +33,43 @@ export default function NoteForm({ onClose, refetch, note, isEdit }) {
       validateOnChange={submitted}
       validationSchema={NOTES_FORM_VALIDATION_SCHEMA}
     >
-      {({ isSubmitting }) => (
+      {({ setFieldValue, isSubmitting }) => (
         <Form className="w-full">
           <Pane.Body className="space-y-6">
             <Input
+              required
               label="Title"
               name="title"
               className="w-full flex-grow-0"
               placeholder="Enter note title"
-              required
             />
             <Textarea
+              required
               label="Description"
               name="description"
               className="w-full flex-grow-0"
               rows={1}
               placeholder="Enter note description"
-              required
             />
             <Select
+              isClearable
+              required
               label="Assigned Contact"
               name="contact"
               className="w-full flex-grow-0"
-              isClearable
               options={NAMES.map(name => ({ label: name, value: name }))}
+              onChange={e => setFieldValue("contact", e ? e.value : "")}
               placeholder="Select Role"
-              required
             />
             <Select
+              isClearable
+              required
               label="Tag"
               name="tag"
               className="w-full flex-grow-0"
-              isClearable
               options={TAGS.map(tag => ({ label: tag, value: tag }))}
+              onChange={e => setFieldValue("tag", e ? e.value : "")}
               placeholder="Select Tag"
-              required
             />
           </Pane.Body>
           <Pane.Footer>

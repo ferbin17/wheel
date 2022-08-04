@@ -10,6 +10,7 @@ import NotesList from "./NotesList";
 import NotesMenu from "./NotesMenu";
 import NewNotePane from "./Pane/Create";
 import EditNotePane from "./Pane/Edit";
+import { addDummyDataToNotes } from "./utils";
 
 const Notes = () => {
   const [loading, setLoading] = useState(true);
@@ -17,19 +18,17 @@ const Notes = () => {
   const [showNewNotePane, setShowNewNotePane] = useState(false);
   const [showEditNote, setShowEditNote] = useState(false);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
-
   const [notes, setNotes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedNote, setSelectedNote] = useState({});
-  const [selectedNoteId, setSelectedNoteId] = useState([]);
 
-  const onEditClickHandler = selectedNote => {
-    setSelectedNote(selectedNote);
+  const handleEdit = note => {
+    setSelectedNote(note);
     setShowEditNote(true);
   };
 
-  const onDeleteClickHandler = ({ id: noteId }) => {
-    setSelectedNoteId([noteId]);
+  const handleDelete = note => {
+    setSelectedNote(note);
     setShowDeleteAlert(true);
   };
 
@@ -41,7 +40,7 @@ const Notes = () => {
     try {
       setLoading(true);
       const { data } = await notesApi.fetch();
-      setNotes(data.notes);
+      setNotes(addDummyDataToNotes(data.notes));
     } catch (error) {
       logger.error(error);
     } finally {
@@ -77,8 +76,8 @@ const Notes = () => {
 
         <NotesList
           notes={notes}
-          onEditClick={onEditClickHandler}
-          onDeleteClick={onDeleteClickHandler}
+          onEditClick={handleEdit}
+          onDeleteClick={handleDelete}
           setShowNewNotePane={setShowNewNotePane}
         />
 
@@ -95,10 +94,10 @@ const Notes = () => {
         />
         {showDeleteAlert && (
           <DeleteAlert
-            selectedNoteId={selectedNoteId}
+            selectedNote={selectedNote}
             onClose={() => setShowDeleteAlert(false)}
             refetch={fetchNotes}
-            setSelectedNoteId={setSelectedNoteId}
+            setSelectedNote={setSelectedNote}
           />
         )}
       </Container>
