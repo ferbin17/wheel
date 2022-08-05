@@ -1,6 +1,6 @@
 import React from "react";
 
-import ContactActions from "./Contact/ContactActions";
+import Actions from "./Contact/Actions";
 
 import { NAMES } from "../Notes/constants";
 
@@ -27,7 +27,7 @@ const fetchContactValues = onDeleteClick =>
           startDate.getTime() +
           Math.random() * (endDate.getTime() - startDate.getTime()),
         icon_button: (
-          <ContactActions contactId={contactId} onDeleteClick={onDeleteClick} />
+          <Actions contactId={contactId} onDeleteClick={onDeleteClick} />
         ),
       };
     });

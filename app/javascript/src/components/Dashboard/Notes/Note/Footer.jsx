@@ -3,19 +3,17 @@ import React from "react";
 import { Clock } from "@bigbinary/neeto-icons";
 import { Avatar, Tooltip, Typography } from "@bigbinary/neetoui";
 
-import NoteTag from "./NoteTag";
+import Tag from "./Tag";
 
 import { parseDateTime } from "../utils";
 
-const NoteFooter = ({ note }) => {
+const Footer = ({ note }) => {
   const { tag, status, created_at, user } = note;
 
   return (
     <div className="mt-3 flex w-full justify-between">
       <div className="flex items-center">
-        {tag && (
-          <NoteTag key={tag.toLowerCase().replace(/ /g, "_")} tag={tag} />
-        )}
+        {tag && <Tag key={tag.toLowerCase().replace(/ /g, "_")} tag={tag} />}
       </div>
 
       <div className="flex items-center">
@@ -47,4 +45,4 @@ const NoteFooter = ({ note }) => {
   );
 };
 
-export default NoteFooter;
+export default Footer;

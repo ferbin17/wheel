@@ -1,9 +1,10 @@
 import React from "react";
 
+import dayjs from "dayjs";
 import * as yup from "yup";
 
-import ContactAvatar from "./Contact/ContactAvatar";
-import ContactDetailText from "./Contact/ContactDetailText";
+import Avatar from "./Contact/Avatar";
+import DetailText from "./Contact/DetailText";
 
 export const CONTACTS_FORM_INITIAL_FORM_VALUES = {
   firstName: "",
@@ -25,7 +26,7 @@ export const CONTACTS_TABLE_COLUMN_DATA = [
     dataIndex: "name",
     key: "name",
     width: "35%",
-    render: name => <ContactAvatar name={name} />,
+    render: name => <Avatar name={name} />,
   },
   {
     title: "Email",
@@ -33,7 +34,7 @@ export const CONTACTS_TABLE_COLUMN_DATA = [
     key: "email",
     width: "35%",
     render: email => (
-      <ContactDetailText text={email} classes="neeto-ui-text-gray-600" />
+      <DetailText text={email} classes="neeto-ui-text-gray-600" />
     ),
   },
   {
@@ -41,31 +42,12 @@ export const CONTACTS_TABLE_COLUMN_DATA = [
     dataIndex: "created_at",
     key: "created_at",
     width: "30%%",
-    render: created_at => {
-      const month = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-      const date = new Date(created_at);
-      const date_value = `${month[date.getMonth()].slice(
-        0,
-        3
-      )}, ${date.getDate()}, ${date.getFullYear()}`;
-
-      return (
-        <ContactDetailText text={date_value} classes="neeto-ui-text-gray-600" />
-      );
-    },
+    render: created_at => (
+      <DetailText
+        text={dayjs(created_at).format("MMM, D, YYYY")}
+        classes="neeto-ui-text-gray-600"
+      />
+    ),
   },
   {
     dataIndex: "icon_button",

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Typography } from "@bigbinary/neetoui";
 
-const NoteContent = ({ note }) => {
+const Content = ({ note }) => {
   const { description } = note;
 
   return (
@@ -17,4 +17,4 @@ const NoteContent = ({ note }) => {
   );
 };
 
-export default NoteContent;
+export default Content;

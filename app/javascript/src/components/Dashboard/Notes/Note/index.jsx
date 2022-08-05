@@ -1,20 +1,20 @@
 import React from "react";
 
-import NoteContainer from "./NoteContainer";
-import NoteContent from "./NoteContent";
-import NoteFooter from "./NoteFooter";
-import NoteHeader from "./NoteHeader";
+import Container from "./Container";
+import Content from "./Content";
+import Footer from "./Footer";
+import Header from "./Header";
 
 const Note = ({ note, onEditClick, onDeleteClick }) => (
-  <NoteContainer key={note.id}>
-    <NoteHeader
+  <Container key={note.id}>
+    <Header
       note={note}
       onEditClick={onEditClick}
       onDeleteClick={onDeleteClick}
     />
-    <NoteContent note={note} />
-    <NoteFooter note={note} />
-  </NoteContainer>
+    <Content note={note} />
+    <Footer note={note} />
+  </Container>
 );
 
 export default Note;
