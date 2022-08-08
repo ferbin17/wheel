@@ -30,40 +30,41 @@ const ContactForm = ({ contact, onClose }) => {
       validateOnChange={submitted}
       validationSchema={CONTACTS_FORM_VALIDATION_SCHEMA}
     >
-      {({ isSubmitting }) => (
+      {({ setFieldValue, isSubmitting }) => (
         <Form className="w-full">
           <Pane.Body className="space-y-6">
             <div className="flex w-full justify-between">
               <Input
+                required
                 label="First Name"
                 name="firstName"
                 className="mr-2 w-full flex-grow-0"
                 placeholder="Enter first name"
-                required
               />
               <Input
+                required
                 label="Last Name"
                 name="lastName"
                 className="ml-2 w-full flex-grow-0"
                 placeholder="Enter last name"
-                required
               />
             </div>
             <Input
+              required
               label="Email Address"
               name="email"
               className="w-full flex-grow-0"
               placeholder="Enter your email address"
-              required
             />
             <Select
+              isClearable
+              required
               label="Role"
               name="role"
               className="w-full flex-grow-0"
-              isClearable
               options={ROLES.map(role => ({ label: role, value: role }))}
+              onChange={e => setFieldValue("role", e ? e.value : "")}
               placeholder="Select Role"
-              required
             />
           </Pane.Body>
           <Pane.Footer>

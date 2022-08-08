@@ -4,20 +4,15 @@ import { Alert } from "neetoui";
 
 import notesApi from "apis/notes";
 
-const DeleteAlert = ({
-  refetch,
-  onClose,
-  selectedNoteId,
-  setSelectedNoteId,
-}) => {
+const DeleteAlert = ({ refetch, onClose, selectedNote, setSelectedNote }) => {
   const [deleting, setDeleting] = useState(false);
 
   const handleDelete = async () => {
     try {
       setDeleting(true);
-      await notesApi.destroy({ ids: selectedNoteId });
+      await notesApi.destroy({ ids: [selectedNote.id] });
       onClose();
-      setSelectedNoteId([]);
+      setSelectedNote({});
       refetch();
     } catch (error) {
       logger.error(error);
@@ -28,13 +23,13 @@ const DeleteAlert = ({
   return (
     <Alert
       isOpen
+      closeButton={false}
       onSubmit={handleDelete}
       onClose={onClose}
       message="Are you sure you want to delete the note? This cannot be undone."
       title="Delete Note"
       isSubmitting={deleting}
       size="md"
-      closeButton={false}
     />
   );
 };

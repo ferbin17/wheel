@@ -11,11 +11,11 @@ const ContactList = ({ contacts, setShowNewContactPane }) => (
   <>
     {contacts.length ? (
       <Table
+        allowRowClick={false}
         columnData={CONTACTS_TABLE_COLUMN_DATA}
         rowData={contacts}
         defaultPageSize={9}
         currentPageNumber={3}
-        allowRowClick={false}
       />
     ) : (
       <EmptyState

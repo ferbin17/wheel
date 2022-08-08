@@ -7,9 +7,7 @@ import Form from "./Form";
 import { CONTACTS_FORM_INITIAL_FORM_VALUES } from "../constants";
 
 const NewContactPane = ({ showPane, setShowPane }) => {
-  const onClose = () => {
-    setShowPane(false);
-  };
+  const onClose = () => setShowPane(false);
 
   return (
     <Pane isOpen={showPane} onClose={onClose}>

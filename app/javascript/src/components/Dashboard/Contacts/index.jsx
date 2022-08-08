@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Button, PageLoader } from "neetoui";
 import { Container, Header } from "neetoui/layouts";
 
-import { fetchContactValues } from "./constants";
 import ContactList from "./ContactList";
 import ContactsMenu from "./ContactsMenu";
 import DeleteContactAlert from "./DeleteAlert";
 import NewContactPane from "./Pane/Create";
+import { fetchContactValues } from "./utils";
 
 const Contacts = () => {
   const [loading, setLoading] = useState(true);
@@ -23,7 +23,7 @@ const Contacts = () => {
     fetchContacts();
   }, []);
 
-  const deleteClickHandler = selectedId => {
+  const handleDelete = selectedId => {
     setSelectedContactId(selectedId);
     setShowDeleteContactAlert(true);
   };
@@ -31,7 +31,7 @@ const Contacts = () => {
   const fetchContacts = async () => {
     try {
       setLoading(true);
-      setContacts(fetchContactValues(deleteClickHandler));
+      setContacts(fetchContactValues(handleDelete));
     } catch (error) {
       logger.error(error);
     } finally {
@@ -68,7 +68,6 @@ const Contacts = () => {
         <ContactList
           contacts={contacts}
           setShowNewContactPane={setShowNewContactPane}
-          onDeleteClick={deleteClickHandler}
         />
 
         <NewContactPane

@@ -14,12 +14,11 @@ const NotesMenu = ({ showNotesMenu }) => {
         <MenuBar.Block label="Users" count={80} />
         <MenuBar.Block label="Leads" count={60} />
         <MenuBar.Block label="Visitors" count={60} />
-
         <MenuBar.SubTitle
           iconProps={[
             {
               icon: Search,
-              onClick: () => setIsSearchCollapsed(!isSearchCollapsed),
+              onClick: () => setIsSearchCollapsed(prevState => !prevState),
             },
           ]}
         >
