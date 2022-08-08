@@ -1,6 +1,6 @@
 import React from "react";
 
-import Actions from "./Contact/Actions";
+import { Actions } from "./Contact";
 
 import { NAMES } from "../Notes/constants";
 

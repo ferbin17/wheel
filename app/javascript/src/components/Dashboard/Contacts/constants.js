@@ -3,8 +3,8 @@ import React from "react";
 import dayjs from "dayjs";
 import * as yup from "yup";
 
-import Avatar from "./Contact/Avatar";
-import DetailText from "./Contact/DetailText";
+import { Avatar } from "./Contact";
+import { DetailText } from "./Contact";
 
 export const CONTACTS_FORM_INITIAL_FORM_VALUES = {
   firstName: "",
